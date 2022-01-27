@@ -8,10 +8,28 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <header>
+            <div id="scores">
+                <a href="#highscores">View Highscores</a> 
+            </div>
+            <div id="timer">
+                Time Remaining : <span id="time-remaining">60</span>
+            </div>    
+    </header>
     <div class="container">
-        <h1>JavaScript Coding Quiz</h1>
-        <p>Test your knowledge of JavaScript! Click "Begin Quiz" to start.</p>
-        <button id="start">Begin Quiz</button>
+        <div id="start-container">
+            <h1>JavaScript Coding Quiz</h1>
+            <p>Test your knowledge of JavaScript! Click "Begin Quiz" to start.</p>
+            <button type="submit" id="start-btn">Begin Quiz</button>
+        </div>    
+            <div id="quiz-container" class="hide">
+                <div id="question">Questions</div>
+                <div id="answer-btns" class="btn-grid">
+                    <button class="btn">Answer 1</button>
+                    <button class="btn">Answer 2</button>
+                    <button class="btn">Answer 3</button>
+                    <button class="btn">Answer 4</button>
+            </div>
     </div>
     <script src="script.js"></script>
 </body>
