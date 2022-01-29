@@ -1,11 +1,55 @@
+var quizContent = [
+    {
+        question: 'Which of the following is not a Javascript Data type?',
+        answer1: "Number", 
+        answer2: "Boolean", 
+        answer3: "String", 
+        answer4: "Letter", 
+        correct: "Letter"
+    },
+    {
+        question: 'Inside which HTML element do we put the JavaScript?',
+        answer1: "<callscript>", 
+        answer2: "<script>", 
+        answer3: "<js>", 
+        answer4: "<javascript>", 
+        correct: "<script>"
+    },
+    {
+        question: 'API stands for ___?',
+        answer1: "application programming interface", 
+        answer2: "advanced program interaction", 
+        answer3: "allocated product inquiry", 
+        answer4: "applied programming interaction", 
+        correct: "application programming interface"
+    },
+    {
+        question: 'The ___ method repeatedly calls a function or executes a code snippet, with a fixed time delay between each call.',
+        answer1: "clearInterval()", 
+        answer2: "setInterval()", 
+        answer3: "eval()", 
+        answer4: "myArray()", 
+        correct: "setInterval()"
+    },
+    {
+        question: 'DOM stands for ___.',
+        answer1: "dedicated operating mode", 
+        answer2: "delineated object mode", 
+        answer3: "document object model", 
+        answer4: "digital operating model", 
+        correct: "document object model"
+    }
+];
 var startBtnEl = document.getElementById('start-btn');
 var startContainerEl = document.getElementById('start-container');
 var quizContainerEl = document.getElementById('quiz-container');
+var scoreCardEl = document.getElementById('scorecard');
 var questionEl = document.getElementById('question');
 var answersEl = document.getElementById('answer-btns');
 var timerEl = document.getElementById('timer');
 var timeLeft = 60;
 var timeRemainingEl = document.getElementById('time-remaining');
+
 var btn1El = document.getElementById('btn1');
 var btn2El = document.getElementById('btn2');
 var btn3El = document.getElementById('btn3');
@@ -20,13 +64,22 @@ function nextQuestion() {
     btn4El.textContent = quizContent[quizNumber].answer4
 }
 
+function endGame() {
+        quizContainerEl.classList.add('hide');
+        scoreCardEl.classList.remove('hide');
+        var scoreHeadline = document.createElement('h2');
+        scoreHeadline.textContent = 'Your Score: ' + timeLeft;
+        scoreCardEl.append(scoreHeadline);
+}
+
 function startGame() {
     startContainerEl.classList.add('hide')
     var timer = setInterval(function() {
         timeLeft--
         timeRemainingEl.textContent = timeLeft
-        if (quizNumber === 5) {
+        if (quizNumber === 5 || timeLeft ===0) {
             clearInterval(timer)
+            endGame()
         }
     }, 1000)
     quizContainerEl.classList.remove('hide')
@@ -40,88 +93,9 @@ function checkAnswer(userChoice) {
     }
     else {
         alert('Incorrect!')
-        timeLeft=timeLeft-5
+        timeLeft=timeLeft-10
     }
 }
-
-var quizContent = [
-    {
-        question: 'Which of the following is not a Javascript Data type?',
-        answer1: "Number", 
-        answer2: "Boolean", 
-        answer3: "String", 
-        answer4: "Letter", 
-        correct: "Letter"
-    },
-    {
-        question: 'Which of the following is not a Javascript Data word?',
-        answer1: "Number", 
-        answer2: "Boolean", 
-        answer3: "String", 
-        answer4: "Letter", 
-        correct: "Letter"
-    },
-    {
-        question: 'Which of the following is not a Javascript Data things?',
-        answer1: "Number", 
-        answer2: "Boolean", 
-        answer3: "String", 
-        answer4: "Letter", 
-        correct: "Letter"
-    },
-    {
-        question: 'Which of the following is not a Javascript Data stuff?',
-        answer1: "Number", 
-        answer2: "Boolean", 
-        answer3: "String", 
-        answer4: "Letter", 
-        correct: "Letter"
-    },
-    {
-        question: 'Which of the following is not a Javascript Data do better?',
-        answer1: "Number", 
-        answer2: "Boolean", 
-        answer3: "String", 
-        answer4: "Letter", 
-        correct: "Letter"
-    }
-    // {
-    //     question: 'Inside which HTML element do we put the JavaScript?',
-    //     answers: [
-    //         {text: '<callscript>', correct: false},
-    //         {text: '<js>', correct: false},
-    //         {text: '<javascript>', correct: false},
-    //         {text: '<script>', correct: true}
-    //     ]
-    // },
-    // {
-    //     question: 'API stands for ___?',
-    //     answers: [
-    //         {text: 'application programming interface', correct: true},
-    //         {text: 'advanced program interaction', correct: false},
-    //         {text: 'allocated product inquiry', correct: false},
-    //         {text: 'applied programming interface', correct: false}
-    //     ]
-    // },
-    // {
-    //     question: 'The ___ method repeatedly calls a function or executes a code snippet, with a fixed time delay between each call.',
-    //     answers: [
-    //         {text: 'clearInterval()', correct: false},
-    //         {text: 'setInterval()', correct: true},
-    //         {text: 'eval()', correct: false},
-    //         {text: 'myArray()', correct: false}
-    //     ]
-    // },
-    // {
-    //     question: 'DOM stands for ___.',
-    //     answers: [
-    //         {text: 'dedicated operating mode', correct: false},
-    //         {text: 'delineated object mode', correct: false},
-    //         {text: 'document object model', correct: true},
-    //         {text: 'digital operating manager', correct: false}
-    //     ]
-    // },
-]
 
 startBtnEl.addEventListener('click', startGame)
 
